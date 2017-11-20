@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,13 +32,17 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> im
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView bookImg;
-        TextView bookName,bookSize;
+        TextView bookName;
+        TextView bookSize;
+        CheckBox checkBox;
 
         public ViewHolder(View itemView) {
             super(itemView);
             bookImg = (ImageView) itemView.findViewById(R.id.book_img);
             bookName = (TextView) itemView.findViewById(R.id.book_name);
             bookSize = (TextView) itemView.findViewById(R.id.book_size);
+            checkBox = (CheckBox) itemView.findViewById(R.id.contact_selected_checkbox);
+            checkBox.setVisibility(View.GONE);
         }
     }
 

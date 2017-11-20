@@ -1,13 +1,14 @@
 package com.example.administrator.laozidetushu.base;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.WindowManager;
+import android.view.View;
 
 import com.example.administrator.laozidetushu.R;
 
@@ -24,12 +25,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= 21) {
+            View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
         setContentView(getLayoutId());
-        transparent();
         context = this;
         ButterKnife.bind(this);
         mtoolbar = ButterKnife.findById(this, R.id.toolbar);
-        if (mtoolbar != null){
+        if (mtoolbar != null) {
             initToolBar();
             setSupportActionBar(mtoolbar);
         }
@@ -45,7 +52,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             finish();
             return true;
         }
@@ -61,14 +68,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
     }
-
-    protected void transparent() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
-            //透明状态栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
-    }
-
+//
 //    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 //    private void toolbarSetElevation(float elevation) {
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

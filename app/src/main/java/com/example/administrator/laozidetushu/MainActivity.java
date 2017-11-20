@@ -1,5 +1,6 @@
 package com.example.administrator.laozidetushu;
 
+import android.content.Intent;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +22,9 @@ public class MainActivity extends BaseActivity {
             if (System.currentTimeMillis() - currentBackPressedTime > BACK_PRESSED_INTERVAL){
                 currentBackPressedTime = System.currentTimeMillis();
                 Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                return true;
+            }else {
+                finish();
             }
         }else if (event.getKeyCode() == KeyEvent.KEYCODE_MENU){
             return true;
@@ -34,6 +38,8 @@ public class MainActivity extends BaseActivity {
             case R.id.seek:
                 break;
             case R.id.add_local:
+                Intent intent = new Intent(MainActivity.this, AddLocalActivity.class);
+                startActivity(intent);
                 break;
             default:
         }

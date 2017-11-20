@@ -17,6 +17,7 @@ import com.example.administrator.laozidetushu.db.Book;
 import org.litepal.crud.DataSupport;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -28,7 +29,7 @@ public class AddLocalActivity extends BaseActivity {
     @Bind(R.id.recyclerview)
     RecyclerView recyclerview;
 
-    private List<Book> books;
+    private static List<Book> books;
     private List<Book> booklist;
     private File file;
     
@@ -43,6 +44,7 @@ public class AddLocalActivity extends BaseActivity {
 
     private void queryFiles() {
         booklist = DataSupport.findAll(Book.class);
+        books = new ArrayList<>();
         if (Environment.getExternalStorageState().equals(
                 android.os.Environment.MEDIA_MOUNTED)){
             file = Environment.getRootDirectory();
@@ -93,7 +95,7 @@ public class AddLocalActivity extends BaseActivity {
         if (files != null){
             for (File f : files) {
                 if (!f.isDirectory()) {
-                    if (f.getName().endsWith(".txt")) {
+                    if (f.getName().endsWith("")) {
                         //获取并计算文件大小
                         long size = f.length();
                         String t_size = "";
@@ -128,7 +130,7 @@ public class AddLocalActivity extends BaseActivity {
     @Override
     protected void initToolBar() {
         mtoolbar.setTitle("扫描本地图书");
-        mtoolbar.setNavigationIcon(R.drawable.back);
+        mtoolbar.setNavigationIcon(R.drawable.ab_back);
     }
 
     @Override
